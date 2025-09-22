@@ -1,0 +1,14 @@
+name: first wf
+
+on: push
+
+jobs:
+  first_job:
+    runs-on: self-hosted
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+      
+    - name: show message
+      run: echo "first wf!"
+    
