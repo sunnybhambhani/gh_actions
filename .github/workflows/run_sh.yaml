@@ -11,6 +11,17 @@ jobs:
       
     - name: change permission
       run: chmod +x ./sh.sh
-      
-    - name: run sh script
+
+    - name: run sh script in first job
       run: bash ./sh.sh
+
+  second_job:
+    runs-on: self-hosted
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+      
+    - name: second message
+      run: |
+        echo "this is message from second job"
+        date    
