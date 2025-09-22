@@ -1,0 +1,19 @@
+name: multiline wf
+
+on: push
+
+jobs:
+  first_job:
+    runs-on: self-hosted
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+      
+    - name: show message
+      run: |
+        echo "multiline wf!"
+        echo "hola amigos!"
+        ls -lrt
+        sudo apt install cowsay -y
+        cowsay "multiline wf!"
+        cowsay "hola amigos!"
