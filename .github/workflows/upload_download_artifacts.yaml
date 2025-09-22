@@ -15,6 +15,11 @@ jobs:
     - name: run sh script in first job
       run: bash ./sh.sh >> cowsay.log
     
+    - uses: actions/upload-artifact@v4
+      with:
+        name: cowsay-log
+        path: cowsay.log
+
   second_job:
     needs: first_job
     runs-on: self-hosted
@@ -26,6 +31,14 @@ jobs:
       run: |
         echo "this is message from second job"
         date    
+    
+    - uses: actions/download-artifact@v4
+      with:
+        name: cowsay-log
+        path: cowsay.log
+    - name: show cowsay log
+      run: cat cowsay.log
+
 
   third_job:
     needs: [first_job, second_job]
