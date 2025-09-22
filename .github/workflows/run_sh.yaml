@@ -1,0 +1,16 @@
+name: run shell script
+
+on: push
+
+jobs:
+  first_job:
+    runs-on: self-hosted
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+      
+    - name: change permission
+      run: chmod +x ./sh.sh
+      
+    - name: run sh script
+      run: bash ./sh.sh
