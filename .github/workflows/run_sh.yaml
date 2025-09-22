@@ -1,4 +1,4 @@
-name: run shell script
+name: run multiple jobs
 
 on: push
 
