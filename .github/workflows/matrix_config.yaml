@@ -1,8 +1,9 @@
 name: matrix config
 
 on: 
-    workflow_dispatch:
-    push:
+  # This syntax is how you correctly specify multiple events
+  - workflow_dispatch
+  - push
 
 jobs:
   build:
@@ -11,12 +12,12 @@ jobs:
         os: [ubuntu-latest, windows-latest]
         images: [alpine]
         exclude:
-        - os: windows-latest
-          images: [alpine]
+          - os: windows-latest
+            images: [alpine]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Docker
         run: docker info
       - name: Run Docker Container
         run: |
-            docker run --rm ${{ matrix.images }}
+          docker run --rm ${{ matrix.images }}
