@@ -5,21 +5,18 @@ on:
     push:
 
 jobs:
-    build:
-        strategy:
-            matrix:
-                os: [ubuntu-latest]
-                images: [hello-world, alpine]
-                exclude:
-                  - os: ubuntu-latest
-                    images: [hello-world]
-#                include:
-#                  - os: ubuntu-22.04
-#                    images: [amd64/alpine]
-        runs-on: ${{ matrix.os }}
-        steps:
-        - name: Docker
-          run: docker info
-        - name: Run Docker Container
-          run: |
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        images: [hello-world, alpine]
+        exclude:
+        - os: ubuntu-latest
+          images: [hello-world]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Docker
+        run: docker info
+      - name: Run Docker Container
+        run: |
             docker run --rm ${{ matrix.images }}
