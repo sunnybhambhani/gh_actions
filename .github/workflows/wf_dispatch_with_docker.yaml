@@ -23,6 +23,9 @@ jobs:
     steps:
       - name: Pull Docker Image
         run: docker pull hola-nginx:v1
+
+      - name: Change tag and name
+        run: docker tag hola-nginx:v1 sunnybhambhani/nginx/hola-nginx:v1
       
       - name: Run Docker Container
         run: |
