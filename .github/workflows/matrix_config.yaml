@@ -9,10 +9,13 @@ jobs:
         strategy:
             matrix:
                 os: [ubuntu-latest, windows-latest]
-                images: [hello-world, nginx]
+                images: [hello-world, alpine]
                 exclude:
                   - os: windows-latest
-                    images: [nginx]
+                    images: [alpine]
+                include:
+                  - os: ubuntu-latest
+                    images: amd64/alpine
         runs-on: ${{ matrix.os }}
         steps:
         - name: Docker
