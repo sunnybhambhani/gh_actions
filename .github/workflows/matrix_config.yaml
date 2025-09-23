@@ -1,0 +1,19 @@
+name: matrix config
+
+on: 
+    workflow_dispatch:
+    push:
+
+jobs:
+    build:
+        strategy:
+            matrix:
+                os: [ubuntu-latest, windows-latest]
+                images: [hello-world, nginx, httpd]
+        runs-on: ${{ matrix.os }}
+        steps:
+        - name: Docker
+          run: docker info
+        - name: Run Docker Container
+          run: |
+            docker run --rm ${{ matrix.images }}
