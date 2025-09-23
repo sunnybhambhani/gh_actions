@@ -9,7 +9,10 @@ jobs:
         strategy:
             matrix:
                 os: [ubuntu-latest, windows-latest]
-                images: [hello-world, nginx, httpd]
+                images: [hello-world, nginx]
+                exclude:
+                  - os: windows-latest
+                    images: [nginx]
         runs-on: ${{ matrix.os }}
         steps:
         - name: Docker
