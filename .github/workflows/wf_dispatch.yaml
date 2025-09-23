@@ -1,0 +1,37 @@
+name: trying wf dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      log_message:
+        description: 'log message'
+        required: true
+        default: 'hello from wf dispatch'
+      run_date:
+        description: 'run date'
+        required: false
+        default: ''
+      run_time:
+        description: 'run time'
+        required: false
+        default: ''
+      run_number:
+        description: 'run number'
+        required: false
+        default: '1'
+
+jobs:
+  dispatch_job:
+    runs-on: self-hosted
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+      
+    - name: show inputs
+      run: |
+        echo "log message: ${{ github.event.inputs.log_message }}"
+        echo "run date: ${{ github.event.inputs.run_date }}"
+        echo "run time: ${{ github.event.inputs.run_time }}"
+        echo "run number: ${{ github.event.inputs.run_number }}"
+        date
+        date +"%T"
+        echo "run number + 1 is: $(( ${{ github.event.inputs.run_number }} + 1 ))"
