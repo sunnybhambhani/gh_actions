@@ -1,0 +1,45 @@
+name: wf_concurrency
+on:
+  workflow_dispatch:
+    inputs:
+      log_message:
+        description: 'log message'
+        required: true
+        default: 'hello from wf dispatch'
+      run_date:
+        description: 'run date'
+        required: false
+        default: ''
+      run_time:
+        description: 'run time'
+        required: false
+        default: ''
+      run_number:
+        description: 'run number'
+        required: false
+        default: '1'
+
+jobs:
+  dispatch_job:
+    runs-on: self-hosted
+    concurrency: 
+      group: wf_concurrency-group
+      cancel-in-progress: true
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+      
+    - name: show inputs and sleep for long time
+      run: |
+        echo "log message: ${{ github.event.inputs.log_message }}"
+        echo "run date: ${{ github.event.inputs.run_date }}"
+        echo "run time: ${{ github.event.inputs.run_time }}"
+        echo "run number: ${{ github.event.inputs.run_number }}"
+        date
+        date +"%T"
+        sleep 6000
+        echo "run number + 1 is: $(( ${{ github.event.inputs.run_number }} + 1 ))"
+
+# Concurrency to avoid multiple runs of this workflow at the same time.
+# By Default it will allow the jobs to run in parallel.
+# Can be enabled at workflow level or job level.
