@@ -8,10 +8,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        images: [alpine, nginx]
+        os: [ubuntu-latest, windows-latest]
+        images: [alpine, hello-world]
         exclude:
-          - os: ubuntu-latest
+          - os: windows-latest
             images: alpine
     steps:
     - name: run
