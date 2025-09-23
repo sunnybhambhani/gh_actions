@@ -32,6 +32,8 @@ jobs:
       uses: actions/checkout@v4
       
     - name: show inputs and sleep for long time
+      timeout-minutes: 1
+      # This will timeout the step if it runs for more than 1 minute.
       run: |
         echo "log message: ${{ github.event.inputs.log_message }}"
         echo "run date: ${{ github.event.inputs.run_date }}"
