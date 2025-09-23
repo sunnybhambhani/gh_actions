@@ -16,20 +16,20 @@ jobs:
         run: docker build -t hola-nginx:v1 .
 
       - name: Change tag and name
-        run: docker tag hola-nginx:v1 sunnybhambhani/nginx/hola-nginx:v1
+        run: docker tag hola-nginx:v1 sunnybhambhani/nginx-hola:v1
     
       - name: Docker Push
-        run: docker push sunnybhambhani/nginx/hola-nginx:v1
+        run: docker push sunnybhambhani/nginx-hola:v1
   deploy:
     runs-on: self-hosted
     needs: docker
     steps:
       - name: Pull Docker Image
-        run: docker pull sunnybhambhani/nginx/hola-nginx:v1
+        run: docker pull sunnybhambhani/nginx-hola:v1
 
 
       - name: Run Docker Container
         run: |
           docker stop hola-nginx || true
           docker rm hola-nginx || true
-          docker run -d -p 8080:80 --name hola-nginx sunnybhambhani/nginx/hola-nginx:v1
+          docker run -d -p 8080:80 --name hola-nginx sunnybhambhani/nginx-hola:v1
