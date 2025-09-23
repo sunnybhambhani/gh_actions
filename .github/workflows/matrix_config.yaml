@@ -8,11 +8,11 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        images: [hello-world, alpine]
+        os: [ubuntu-latest, windows-latest]
+        images: [alpine]
         exclude:
-        - os: ubuntu-latest
-          images: [hello-world]
+        - os: windows-latest
+          images: [alpine]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Docker
