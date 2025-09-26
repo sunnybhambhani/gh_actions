@@ -17,10 +17,12 @@ on:
 jobs:
   example_job:
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.Required == true }}
+    if: ${{ inputs.Required }}
+    #if/: github.ref == 'refs/heads/main'
+    # Above statement checks if the event that triggered the workflow is a push to the main branch.
     # If need to match string then use double quotes around the string.
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Run command
-        run: echo "The input was:" ${{ github.event.inputs.Message }}
+        run: echo "The input was:" ${{ inputs.Message }}
