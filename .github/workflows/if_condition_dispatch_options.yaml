@@ -6,16 +6,18 @@ on:
       Required:
         description: 'Is this run neccessary?'
         required: true
-        type : boolean
+        default: false
+        type: boolean
       Message:
         description: 'Message goes here!'
         required: false
         default: 'Hello, World!'
+        type: string
 
 jobs:
   example_job:
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.Required }}
+    if: ${{ github.event.inputs.Required == true }}
     # If need to match string then use double quotes around the string.
     steps:
       - name: Checkout code
