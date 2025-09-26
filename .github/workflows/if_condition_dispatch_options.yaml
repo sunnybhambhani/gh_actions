@@ -1,0 +1,22 @@
+name: Trying WF with if condition and dispatch options
+
+on:
+  workflow_dispatch:
+    inputs:
+      Required:
+        description: 'Is this run neccessary?'
+        required: true
+      Message:
+        description: 'Message goes here!'
+        required: false
+        default: 'Hello, World!'
+
+jobs:
+  example_job:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.Required == 'true' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run command
+        run: echo "The input was:" ${{ github.event.inputs.Message }}
