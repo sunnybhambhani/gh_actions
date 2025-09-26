@@ -15,7 +15,8 @@ on:
 jobs:
   example_job:
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.Required == true }}
+    if: ${{ github.event.inputs.Required }}
+    # If need to match string then use double quotes around the string.
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
